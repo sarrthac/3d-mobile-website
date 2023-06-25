@@ -1,4 +1,11 @@
-import React, { useCallback, useRef } from "react";
+import React, { 
+    useCallback,
+    useRef,
+    useEffect,
+    useState,
+    forwardRef,
+    useImperativeHandle
+ } from "react";
 import {
   ViewerApp,
   AssetManagerPlugin,
@@ -13,7 +20,8 @@ import {
 } from "webgi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function WebgiViewer() {
   const canvasRef = useRef(null);
