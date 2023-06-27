@@ -26,7 +26,7 @@ export default function SoundSection() {
                 <button className="button">Buy</button>
             </li>
             <li>
-                <a className="Link" onClick={handleLearnMore}>Learn more</a>
+                <a className="link" onClick={handleLearnMore}>Learn more</a>
             </li>
           </ul>
         </div>
