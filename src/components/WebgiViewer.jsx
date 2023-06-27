@@ -14,11 +14,21 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
+import { scrollAnimation } from "../lib/scroll-animation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function WebgiViewer() {
   const canvasRef = useRef(null);
+
+  //useCallback is used for caching so that we dont have to call the function repeatedly helps us to save resourses
+  const memoizedScrollAnimation = useCallback(
+    (position,target,onUpdate) => {
+      if(position && target && onUpdate) {
+        scrollAnimation(position,target,onUpdate);
+      }
+    },[]
+  )
 
   //caching this component function to avoid recreating it everytime
   const setupViewer = useCallback(async () => {
@@ -60,12 +70,19 @@ export default function WebgiViewer() {
 
     let needsUpdate = true;
 
+    const onUpdate = () => {
+      needsUpdate = true;
+      viewer.setDirty();
+    }
+
     viewer.addEventListener("preFrame", () => {
       if (needsUpdate) {
         camera.positionTargetUpdated(true);
         needsUpdate = false;
       }
     });
+
+    memoizedScrollAnimation(position,target,onUpdate)
 
   }, []);
 
