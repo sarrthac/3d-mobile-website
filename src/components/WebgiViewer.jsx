@@ -20,10 +20,9 @@ import {
 } from "webgi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
 import { scrollAnimation } from "../lib/scroll-animation";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);   
 
 export default function WebgiViewer() {
   const canvasRef = useRef(null);
